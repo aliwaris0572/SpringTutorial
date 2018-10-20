@@ -52,10 +52,30 @@ public class PersonController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public CommonModel addPerson(@RequestBody Persons p) {
-		iPersonService.addPerson(p);
-		service.setCode(AppConstants.CODE_SUCCESS);
-		service.setMessage("Person details saved");
-		service.setData(null);
+		if(iPersonService.addPerson(p)) {
+			service.setCode(AppConstants.CODE_SUCCESS);
+			service.setMessage("Person details saved");
+			service.setData(null);
+		} else {
+			service.setCode(AppConstants.CODE_FAILURE);
+			service.setMessage("Person could not be saved.");
+			service.setData(null);
+		}
+		
+		return service;
+	}
+	
+	@RequestMapping(value="/removePerson/{id}", method=RequestMethod.DELETE)
+	public CommonModel removePerson(@PathVariable Long id) {
+		if(iPersonService.removePerson(id)) {
+			service.setCode(AppConstants.CODE_SUCCESS);
+			service.setMessage("Person removed successfully");
+			service.setData(null);
+		} else {
+			service.setCode(AppConstants.CODE_FAILURE);
+			service.setMessage("Person could not be removed.");
+			service.setData(null);
+		}
 		return service;
 	}
 	

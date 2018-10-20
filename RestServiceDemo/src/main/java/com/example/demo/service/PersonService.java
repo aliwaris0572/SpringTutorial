@@ -41,8 +41,24 @@ public class PersonService implements IPersonService {
 
 	@Override
 	public boolean addPerson(Persons personData) {
+		try {
 		repo.save(personData);
 		return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean removePerson(Long id) {
+		try {
+		repo.deleteById(id);
+		return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
 	}
 
 }

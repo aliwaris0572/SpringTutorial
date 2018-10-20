@@ -9,4 +9,5 @@ public interface IPersonService {
 	public List<Person> getAllPersons();
 	public Person getPerson(Long id) throws Exception;
 	public boolean addPerson(Persons personData);
+	public boolean removePerson(Long id);
 }
