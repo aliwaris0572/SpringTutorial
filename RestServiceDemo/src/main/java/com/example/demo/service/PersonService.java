@@ -39,4 +39,10 @@ public class PersonService implements IPersonService {
 		return person;
 	}
 
+	@Override
+	public boolean addPerson(Persons personData) {
+		repo.save(personData);
+		return true;
+	}
+
 }

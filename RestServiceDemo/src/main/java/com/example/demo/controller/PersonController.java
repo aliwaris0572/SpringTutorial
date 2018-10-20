@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.AppConstants;
+import com.example.demo.bean.Persons;
 import com.example.demo.model.CommonModel;
 import com.example.demo.model.Person;
 import com.example.demo.service.IPersonService;
@@ -50,16 +51,12 @@ public class PersonController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public CommonModel addPerson(@RequestBody Person p) {
-		PersonValidator validator = new PersonValidator();
-		CommonModel mValidated = validator.validate(p);
-		
-		if(mValidated.getCode() == AppConstants.CODE_FAILURE)
-			return service = mValidated;
-		else {
-			//TODO
-		return service = mValidated;
-		}
+	public CommonModel addPerson(@RequestBody Persons p) {
+		iPersonService.addPerson(p);
+		service.setCode(AppConstants.CODE_SUCCESS);
+		service.setMessage("Person details saved");
+		service.setData(null);
+		return service;
 	}
 	
 }
